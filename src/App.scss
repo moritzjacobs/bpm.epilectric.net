@@ -1,0 +1,149 @@
+// @import url("https://fonts.googleapis.com/css?family=IBM+Plex+Sans:700i&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Inconsolata:700&display=swap");
+
+@import "./reset";
+
+$rootColor: #77df8e;
+$focusColor: #fde185;
+$font: "Inconsolata", monospace;
+
+:root {
+	--hue: 128;
+	--sat: 50%;
+	--color-ui: hsl(var(--hue), var(--sat), 50%);
+	--color-ui-light: hsl(var(--hue), var(--sat), 60%);
+	--color-ui-lighter: hsl(var(--hue), var(--sat), 75%);
+	--color-ui-lightest: hsl(var(--hue), var(--sat), 90%);
+	--color-ui-dark: hsl(var(--hue), var(--sat), 40%);
+	--color-ui-darker: hsl(var(--hue), var(--sat), 30%);
+
+	--color-focus: #{$focusColor};
+}
+
+@mixin fill {
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: stretch;
+	align-items: stretch;
+	align-content: stretch;
+
+	> * {
+		display: block;
+		flex: 1 0 20%;
+	}
+}
+
+@mixin button {
+	border: 2px solid var(--color-ui-dark);
+	background-color: var(--color-ui-lighter);
+	color: var(--color-ui-lightest);
+	font-family: $font;
+	font-size: 1em;
+	text-transform: uppercase;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	&:focus {
+		border-color: var(--color-focus);
+		background-color: var(--color-focus);
+	}
+}
+
+body {
+	background-color: var(--color-ui-dark);
+	font-family: $font;
+	border: 1px solid black;
+	padding: 2rem;
+	overflow: hidden;
+	&:after {
+		content: "";
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 999;
+		background: linear-gradient(
+			30deg,
+			var(--color-ui-lightest),
+			var(--color-ui-darker)
+		);
+		pointer-events: none;
+		mix-blend-mode: color-burn;
+	}
+}
+
+button {
+	@include button;
+}
+
+.app {
+	display: flex;
+	flex-flow: column nowrap;
+	min-height: calc(100vh - 4rem);
+
+	&:after {
+		content: "";
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 999;
+		background-color: var(--color-ui-lightest);
+		pointer-events: none;
+		opacity: 0;
+	}
+
+	&--triggered:after {
+		animation: blink 300ms linear 1;
+		@keyframes blink {
+			0%,
+			100% {
+				opacity: 0;
+			}
+			10% {
+				opacity: 0.1;
+			}
+		}
+	}
+}
+
+.main {
+	flex: 1 0 100%;
+	@include fill;
+
+	button {
+		border: none;
+	}
+}
+
+.toolbar {
+	@include fill;
+
+	&__buttons {
+		@include fill;
+		flex-flow: column nowrap;
+
+		button + button {
+			margin-top: -2px;
+		}
+	}
+
+	&__item {
+		@include fill;
+
+		.unit {
+			border: none;
+		}
+	}
+}
+
+.floating {
+	position: absolute;
+	bottom: 1rem;
+	right: 1rem;
+	z-index: 99;
+	width: 10rem;
+}

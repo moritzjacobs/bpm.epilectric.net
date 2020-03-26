@@ -1,0 +1,75 @@
+.click-to-copy {
+	$color: #fff;
+	background-color: inherit;
+	border: none;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+
+	position: relative;
+	cursor: pointer;
+
+	&__overlay {
+		pointer-events: none;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: transparent;
+		transition: background 300ms;
+
+		&:after {
+			content: "copied!";
+			pointer-events: none;
+			color: var(--color-ui-lightest);
+			text-shadow: 0 0 3px var(--color-ui);
+			opacity: 0;
+			transform: translate(-50%, -50%) rotate(-7deg);
+			display: block;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			z-index: 1000;
+		}
+	}
+
+	&--copied {
+		@keyframes copied {
+			0% {
+				opacity: 0;
+				transform: translate(-50%, -50%) rotate(-7deg);
+
+			}
+			30% {
+				opacity: 1;
+			}
+			70% {
+				opacity: 1;
+			}
+			100% {
+				opacity: 0;
+				transform: translate(-50%, -3rem) rotate(-17deg);
+
+			}
+		}
+
+		&:after {
+			opacity: 1;
+			animation: copied 500ms ease-in 1;
+		}
+	}
+
+	&:focus &__overlay {
+		border: 3px solid var(--color-focus);
+		background-color: var(--color-focus);
+		mix-blend-mode: multiply;
+	}
+
+	&:hover &__overlay {
+		background-color: rgba($color, 0.4);
+	}
+}

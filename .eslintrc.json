@@ -1,0 +1,26 @@
+{
+  "extends": [
+    "peerigon",
+    "peerigon/typescript",
+    "peerigon/react",
+    // Arrow functions are preferred with TypeScript
+    // See https://github.com/peerigon/eslint-config-peerigon/issues/23#issuecomment-472614432
+    "peerigon/styles/prefer-arrow",
+    "prettier", // add this and...
+    "prettier/@typescript-eslint" // ...this if you're using Prettier
+  ],
+  "parserOptions": {
+    // Relative to the folder where eslint is executed
+    // See https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/parser/README.md#parseroptionsproject
+    "project": "./tsconfig.json"
+  },
+  "rules": {
+    "no-tabs": "off",
+    "indent": ["error", "tab"],
+    "react/jsx-indent": ["error", "tab"],
+    "react/jsx-indent-props": ["error", "tab"],
+    "no-console": "warn",
+    "@typescript-eslint/naming-convention": "off"
+  },
+  "root": true
+}

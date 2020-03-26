@@ -1,0 +1,48 @@
+.scale {
+	$keyH: 2rem;
+	$borderW: 3px;
+	$borderColor: var(--color-ui-lighter);
+	$semitoneW: 50%;
+	$color: var(--color-ui-light);
+	$bgColor: var(--color-ui-lightest);
+
+	max-width: 15 * $keyH;
+	font-size: 0.75em;
+
+	&__key {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		height: $keyH;
+		padding-left: calc(#{$semitoneW} + 1em);
+		padding-right: 1em;
+		color: $color;
+		border: $borderW solid $borderColor;
+		background-color: $bgColor;
+		text-align: center;
+
+		&:not(&--is-semitone) {
+			& + & {
+				margin-top: -1 * $borderW;
+			}
+		}
+
+		&--is-semitone {
+			background-color: $color;
+			color: $bgColor;
+			position: relative;
+			width: $semitoneW;
+			padding-right: 0;
+			padding-left: 0;
+			z-index: 1;
+			margin-bottom: calc(#{-0.5 * $keyH} - #{$borderW});
+			margin-top: calc(#{-0.5 * $keyH} - #{$borderW});
+		}
+
+		&:not(&--is-semitone) .click-to-copy__overlay:after {
+			left: auto;
+			right: 0;
+		}
+	}
+}
