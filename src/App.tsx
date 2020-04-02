@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import useBpmEvents from "./useBpmEvents";
 import {bpmFromBeats, scaleBpm, weightBpm, getConfidence} from "./bpm";
 import Decimals from "./Decimals";
@@ -45,10 +45,14 @@ const setHSL = ([hue, sat]: HSLTuple) => {
 };
 
 const App = () => {
+	const [manualValue, setManualValue] = useState(100);
 	const {events, trigger, reset, resetNextTime} = useBpmEvents();
 
 	const enterManually = () => {
-		alert("@TODO");
+		// eslint-disable-next-line no-alert
+		const newManualValue = prompt("BPM?");
+
+		setManualValue(parseFloat(newManualValue ?? "100"));
 	};
 
 	useHotkey("KeyR", reset);
@@ -69,7 +73,7 @@ const App = () => {
 	const bpm =
 		counting !== null && measuring !== null
 			? weightBpm(counting, measuring, confidence)
-			: 100;
+			: manualValue;
 
 	setHSL([
 		mapValue(bpm, 70, 200, 0, 255),

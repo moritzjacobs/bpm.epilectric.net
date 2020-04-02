@@ -50,12 +50,20 @@ $font: "Inconsolata", monospace;
 	}
 }
 
+html {
+	font-size: 0.66rem;
+	@media only screen and (min-width: 480px) {
+		font-size: 1rem;
+	}
+}
+
 body {
 	background-color: var(--color-ui-dark);
 	font-family: $font;
 	border: 1px solid black;
 	padding: 2rem;
 	overflow: hidden;
+	min-width: 340px;
 	&:after {
 		content: "";
 		position: fixed;
@@ -118,7 +126,6 @@ button {
 		border: none;
 	}
 }
-
 .toolbar {
 	@include fill;
 

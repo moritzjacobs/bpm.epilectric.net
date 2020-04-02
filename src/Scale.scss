@@ -1,13 +1,13 @@
 .scale {
-	$keyH: 2rem;
+	$keyH: 2em;
 	$borderW: 3px;
 	$borderColor: var(--color-ui-lighter);
 	$semitoneW: 50%;
 	$color: var(--color-ui-light);
 	$bgColor: var(--color-ui-lightest);
 
-	max-width: 15 * $keyH;
-	font-size: 0.75em;
+	max-width: 25 * $keyH;
+	font-size: 1.25em;
 
 	&__key {
 		display: flex;
